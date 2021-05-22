@@ -4,7 +4,6 @@
     <el-form :inline="true" size="mini" class="demo-form-inline">
       <el-form-item>
         <el-input v-model="academyTeacherQuery.name" placeholder="讲师名称" />
-        {{ academyTeacherQuery.name }}
       </el-form-item>
       <el-form-item>
         <el-select v-model="academyTeacherQuery.level" clearable placeholder="讲师头衔">
@@ -12,8 +11,6 @@
           <el-option :value="2" label="首席讲师" />
         </el-select>
       </el-form-item>
-      {{ academyTeacherQuery.level }}
-
       <el-form-item label="添加时间">
         <el-date-picker
           v-model="academyTeacherQuery.createTime"
@@ -23,7 +20,6 @@
           default-time="00:00:00"
         />
       </el-form-item>
-      {{ academyTeacherQuery.createTime }}
       <el-form-item>
         <el-date-picker
           v-model="academyTeacherQuery.updateTime"
@@ -33,8 +29,6 @@
           default-time="00:00:00"
         />
       </el-form-item>
-      {{ academyTeacherQuery.updateTime }}
-
       <el-button size="mini" type="primary" icon="el-icon-search" @click="getPageList()">查询</el-button>
       <el-button size="mini" type="default" @click="resetData()">清空</el-button>
     </el-form>
