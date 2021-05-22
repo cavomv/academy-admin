@@ -11,10 +11,9 @@ export default {
     // 调用axios的初始化模块 发送远程请求
     return request({
       url: `${teacher_api}/${current}/${size}`,
-      methods: 'post',
-      // academyTeacherQuery 条件对象 后端使用requestbody获取数据
-      // data 表示将对象转换为json进行传递到接口里面
-      data: academyTeacherQuery
+      methods: 'get',
+      // params 传递键值对
+      params: academyTeacherQuery
     })
   },
   removeById(id) {
