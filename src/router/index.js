@@ -78,7 +78,8 @@ export const constantRoutes = [
         path: 'edit/:id',
         name: '讲师修改',
         component: () => import('@/views/academy/teacher/form'),
-        meta: { title: '讲师修改', icon: 'tree' }
+        meta: { title: '讲师修改', icon: 'tree' },
+        hidden: true
       },
       {
         path: 'form',
