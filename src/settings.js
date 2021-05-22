@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'QA学院管理平台',
+  title: 'QA管理平台',
 
   /**
    * @type {boolean} true | false
