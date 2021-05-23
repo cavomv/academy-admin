@@ -5,6 +5,13 @@ const teacher_api = '/teacher'
 // 导出默认模块
 export default {
 
+  all() {
+    return request({
+      url: `${teacher_api}/all`,
+      method: 'get'
+    })
+  },
+
   // 讲师列表(条件查询分页)
   // current 当前页 size 每页记录数 academyTeacherQuery 条件对象
   getPageList(current, size, academyTeacherQuery) {
