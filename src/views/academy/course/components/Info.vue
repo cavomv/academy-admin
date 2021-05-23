@@ -8,7 +8,19 @@
           placeholder="Java学习：从零开始"
         />
       </el-form-item>
+
       <!--课程讲师 TODO -->
+      <el-form-item label="课程讲师">
+        <el-select v-model="courseInfo.teacherId">
+          <el-option
+            v-for="teacher in teacherList"
+            :key="teacher.id"
+            :label="teacher.name"
+            :value="teacher.id"
+          />
+        </el-select>
+      </el-form-item>
+
       <!--所属分类 TODO -->
       <el-form-item label="总课时">
         <el-input-number
@@ -41,6 +53,7 @@
 
 <script>
 import course from '@/api/academy/course'
+import teacher from '@/api/academy/teacher'
 
 export default {
   data() {
@@ -56,15 +69,28 @@ export default {
         courseTypeParentId: '',
         cover: '',
         description: ''
-      }
+      },
+      // 讲师列表
+      teacherList: []
     }
   },
+  created() {
+    this.initTeacherList()
+  },
   methods: {
+
+    // 新增讲师
+    initTeacherList() {
+      teacher.all().then(response => {
+        this.teacherList = response.data.items
+      })
+    },
     // 保存并下一步
     saveAndNext() {
       this.saveBtnDisabled = true
       this.saveData()
     },
+    // 新增课程信息
     saveData() {
       course.saveCourseInfo(this.courseInfo).then(response => {
         this.$message.success(response.message)
