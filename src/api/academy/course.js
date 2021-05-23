@@ -9,5 +9,11 @@ export default {
       data: courseInfo
     }
     )
+  },
+  getCourseInfoById(id) {
+    return request({
+      url: `${course_api}/${id}`,
+      method: 'get'
+    })
   }
 }
