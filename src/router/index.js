@@ -80,12 +80,6 @@ export const constantRoutes = [
         component: () => import('@/views/academy/teacher/form'),
         meta: { title: '讲师修改', icon: 'tree' },
         hidden: true
-      },
-      {
-        path: 'form',
-        name: 'teacherForm',
-        component: () => import('@/views/academy/teacher/form'),
-        meta: { title: '讲师表单', icon: 'form' }
       }
     ]
   },
