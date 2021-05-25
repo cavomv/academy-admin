@@ -25,7 +25,7 @@ export default {
   },
   removeById(id) {
     return request({
-      url: `${teacher_api}/${id}`,
+      url: `${teacher_api}/remove/${id}`,
       method: 'delete'
     })
   },

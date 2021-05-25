@@ -15,5 +15,19 @@ export default {
       url: `${course_api}/${id}`,
       method: 'get'
     })
+  },
+  updateCourseInfoById(courseInfo) {
+    return request({
+      url: `${course_api}/update/`,
+      method: 'put',
+      data: courseInfo
+    })
+  },
+  getCourseInfoPageList(current, size, courseQuery) {
+    return request({
+      url: `${course_api}/${current}/${size}`,
+      method: 'get',
+      params: courseQuery
+    })
   }
 }

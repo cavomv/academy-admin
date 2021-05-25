@@ -133,8 +133,13 @@ export default {
     }
   },
   created() {
-    // 数据回显
+    // 数据回显 courseId 来自于路由
+    if (this.$route.name === 'CourseInfoEdit') {
+      this.$parent.courseId = this.$route.params.id
+    }
+    // 数据回显 courseId 来自于父组件
     if (this.$parent.courseId) {
+      // 新增 只渲染一级类别
       this.fetchCourseById(this.$parent.courseId)
     }
     this.initTeacherList()
@@ -146,8 +151,22 @@ export default {
       course.getCourseInfoById(id)
         .then(response => {
           this.courseInfo = response.data.item
+          // 课程类别渲染
+          courseCategory.getNestedList().then(response => {
+            this.courseCategoryFirstList = response.data.items
+
+            // 根据选中的一级类别渲染二级类别
+            this.courseCategoryFirstList.forEach(
+              courseCategoryFirst => {
+                // 判断当前选中的一级分类是否和当前遍历的一级分类ID相同
+                if (courseCategoryFirst.id === this.courseInfo.courseTypeParentId) {
+                  this.courseCategorySecondList = courseCategoryFirst.children
+                }
+              })
+          })
         })
     },
+
     // 切换一级分类下拉列表
     courseTypeChanged(value) {
       console.log('value', value)
@@ -159,7 +178,6 @@ export default {
           // 判断当前选中的一级分类是否和当前遍历的一级分类ID相同
           if (courseCategoryFirst.id === value) {
             this.courseCategorySecondList = courseCategoryFirst.children
-            console.log(this.courseCategorySecondList)
           }
         }
       )
@@ -181,14 +199,19 @@ export default {
     // 保存并下一步
     saveAndNext() {
       this.saveBtnDisabled = true
-      this.saveData()
+      if (!this.$parent.courseId) {
+        this.saveData()
+      } else {
+        this.updateData()
+      }
     },
+
     // 新增课程信息
     saveData() {
       course.saveCourseInfo(this.courseInfo).then(response => {
         this.$message.success(response.message)
         // 获取courseId
-        this.$parent.course = response.data.courseId
+        this.$parent.courseId = response.data.courseId
         // 访问父组件Form成员 用$parent关键字
         this.$parent.active = 1
       })
