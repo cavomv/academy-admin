@@ -11,6 +11,8 @@ import '@/styles/index.scss' // global css
 import App from './App'
 import store from './store'
 import router from './router'
+import tinymce from 'tinymce'
+import VueTinymce from '@packy-tang/vue-tinymce'
 
 import '@/icons' // icon
 import '@/permission' // permission control
@@ -28,6 +30,8 @@ if (process.env.NODE_ENV === 'production') {
   mockXHR()
 }
 
+Vue.prototype.$tinymce = tinymce
+Vue.use(VueTinymce)
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明

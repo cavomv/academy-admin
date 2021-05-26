@@ -61,8 +61,14 @@
 
       <!-- 课程简介 -->
       <el-form-item label="课程简介">
-        <tinymce v-model="courseInfo.description" :height="200" />
+        <vue-tinymce
+          v-model="courseInfo.description"
+          :setting="setting"
+        />
+
+        <!-- <tinymce v-model="courseInfo.description" :height="200" /> -->
       </el-form-item>
+
       <!-- 课程封面 -->
       <el-form-item label="课程封面">
         <el-upload
@@ -97,21 +103,21 @@
       >保存并下一步</el-button>
     </div>
   </div>
+
 </template>
 
 <script>
 import course from '@/api/academy/course'
 import teacher from '@/api/academy/teacher'
 import courseCategory from '@/api/academy/coursecategory'
-import Tinymce from '@/components/Tinymce'
 
 export default {
-
-  // 注册富文本编辑器组件
-  components: { Tinymce },
-
   data() {
     return {
+      setting: {
+        height: 400,
+        language: 'zh_CN'
+      },
       // 按钮是否禁用
       saveBtnDisabled: false,
       // 课程基本信息
@@ -146,6 +152,11 @@ export default {
     this.initCourseCategoryList()
   },
   methods: {
+    change(value, render) {
+      // 实时获取转成html的数据
+      this.html = render
+      console.log(this.html)
+    },
     // 根据id 查询课程基本信息
     fetchCourseById(id) {
       course.getCourseInfoById(id)
@@ -259,14 +270,18 @@ export default {
       this.$message.error('上传失败（http错误）')
     }
   }
+
 }
 </script>
-<style scoped>
+
+<style>
 .tinymce-container {
-  line-height: 29px;
+  position: relative;
+  line-height: normal;
 }
+
 .cover-uploader .el-upload {
-  border: 1px dashed #ce1111;
+  border: 1px dashed #d9d9d9;
   border-radius: 6px;
   cursor: pointer;
   position: relative;
@@ -278,15 +293,14 @@ export default {
 .cover-uploader .avatar-uploader-icon {
   font-size: 28px;
   color: #8c939d;
-  width: 480px;
-  height: 320px;
-  line-height: 320px;
+  width: 640px;
+  height: 357px;
+  line-height: 357px;
   text-align: center;
 }
-.cover-uploader {
-  width: 480px;
-  height: 320px;
+.cover-uploader img {
+  width: 640px;
+  height: 357px;
   display: block;
 }
-
 </style>
