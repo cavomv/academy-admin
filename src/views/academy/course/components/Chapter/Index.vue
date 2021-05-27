@@ -1,6 +1,5 @@
 <template>
   <div class="app-container">
-    <!-- 章节列表 -->
     <!-- 添加章节按钮 -->
     <div>
       <el-button type="primary" @click="addChapter()">添加章节</el-button>
@@ -45,7 +44,7 @@
 </template>
 
 <script>
-import chapterApi from '@/api/academy/chapter'
+import chapter from '@/api/academy/chapter'
 // import videoApi from '@/api/academy/video'
 
 // 1、引入组件
@@ -68,7 +67,7 @@ export default {
 
     // 获取后端章节列表数据
     fetchNodeList() {
-      chapterApi.getNestedList(this.$parent.courseId).then(response => {
+      chapter.getNestedList(this.$parent.courseId).then(response => {
         this.chapterList = response.data.items
       })
     },
@@ -79,7 +78,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        return chapterApi.removeById(chapterId)
+        return chapter.removeById(chapterId)
       }).then(response => {
         this.fetchNodeList()
         this.$message.success(response.message)

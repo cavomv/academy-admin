@@ -23,9 +23,9 @@ export default {
       method: 'get'
     })
   },
-  getById(id) {
+  getById(chapterId) {
     return request({
-      url: `${chapter_api}/getById/${id}`,
+      url: `${chapter_api}/getById/${chapterId}`,
       method: 'get'
     })
   }

@@ -38,7 +38,7 @@ export default {
       this.dialogVisible = true
       if (chapterId) {
         chapter.getById(chapterId).then(response => {
-          this.chapter = response.data.item
+          this.chapter = response.data.items
         })
       }
     },

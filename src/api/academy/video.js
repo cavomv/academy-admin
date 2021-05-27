@@ -1,10 +1,11 @@
 import request from '@/utils/request'
+const video_api = '/teacher/chapter'
 
 export default {
 
   save(video) {
     return request({
-      url: '/admin/edu/video/save',
+      url: '${video_api}/save',
       method: 'post',
       data: video
     })
@@ -12,14 +13,14 @@ export default {
 
   getById(id) {
     return request({
-      url: `/admin/edu/video/get/${id}`,
+      url: `${video_api}/get/${id}`,
       method: 'get'
     })
   },
 
   updateById(video) {
     return request({
-      url: '/admin/edu/video/update',
+      url: '${video_api}/update',
       method: 'put',
       data: video
     })
@@ -27,7 +28,7 @@ export default {
 
   removeById(id) {
     return request({
-      url: `/admin/edu/video/remove/${id}`,
+      url: `${video_api}/remove/${id}`,
       method: 'delete'
     })
   }
