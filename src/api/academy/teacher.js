@@ -47,7 +47,7 @@ export default {
   updateById(teacher) {
     return request({
       url: `${teacher_api}/update`,
-      method: 'post',
+      method: 'put',
       data: teacher
     })
   }
