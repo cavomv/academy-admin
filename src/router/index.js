@@ -137,7 +137,7 @@ export const constantRoutes = [
         path: 'chapter/:id',
         name: 'CourseChapterEdit',
         component: () => import('@/views/academy/course/form'),
-        meta: { title: '编辑大纲' },
+        meta: { title: '编辑课程大纲' },
         hidden: 'true'
       }
     ]

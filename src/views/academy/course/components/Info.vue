@@ -139,10 +139,10 @@ export default {
     }
   },
   created() {
-    // 数据回显 courseId 来自于路由
-    if (this.$route.name === 'CourseInfoEdit') {
-      this.$parent.courseId = this.$route.params.id
-    }
+    // // 数据回显 courseId 来自于路由
+    // if (this.$route.name === 'CourseInfoEdit') {
+    //   this.$parent.courseId = this.$route.params.id
+    // }
     // 数据回显 courseId 来自于父组件
     if (this.$parent.courseId) {
       // 新增 只渲染一级类别

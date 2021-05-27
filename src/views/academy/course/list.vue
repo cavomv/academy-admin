@@ -109,6 +109,9 @@
           <router-link :to="'/course/info/'+scope.row.id" style="margin-right: 5px">
             <el-button type="primary" size="mini" icon="el-icon-edit">修改</el-button>
           </router-link>
+          <router-link :to="'/course/chapter/'+scope.row.id" style="margin-right: 5px">
+            <el-button type="primary" size="mini" icon="el-icon-edit">编辑大纲</el-button>
+          </router-link>
           <el-button type="danger" size="mini" icon="el-icon-delete" @click="removeById(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
@@ -197,7 +200,6 @@ export default {
       coursecategory.getNestedList().then(
         respose => {
           this.courseTypeParentList = respose.data.items
-          console.log('获取课程分类列表' + this.courseTypeParentList.id)
         }
       )
     },

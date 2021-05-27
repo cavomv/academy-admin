@@ -25,8 +25,14 @@ export default {
   },
   getById(chapterId) {
     return request({
-      url: `${chapter_api}/getById/${chapterId}`,
+      url: `${chapter_api}/get/${chapterId}`,
       method: 'get'
+    })
+  },
+  removeById(chapterId) {
+    return request({
+      url: `${chapter_api}/remove/${chapterId}`,
+      method: 'delete'
     })
   }
 }

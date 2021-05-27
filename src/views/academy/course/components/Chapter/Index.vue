@@ -10,7 +10,7 @@
       <li v-for="chapter in chapterList" :key="chapter.id">
         <p>{{ chapter.title }}
           <span class="acts">
-            <el-button type="text" @click="addVideo(chapter.id)">添加课时</el-button>
+            <el-button type="text" @click="addVideo(chapter.id)">添加</el-button>
             <el-button type="text" @click="editChapter(chapter.id)">编辑</el-button>
             <el-button type="text" @click="removeChapterById(chapter.id)">删除</el-button>
           </span>
@@ -38,21 +38,22 @@
     </div>
     <!-- 章节表单对话框 -->
     <chapter-form ref="chapterForm" />
+    <!-- 课时表单对话框 -->
+    <video-form ref="videoForm" />
   </div>
-  <!-- 课时表单对话框 -->
-  <!-- <video-form ref="videoForm" /> -->
+
 </template>
 
 <script>
 import chapter from '@/api/academy/chapter'
-// import videoApi from '@/api/academy/video'
+import video from '@/api/academy/video'
 
 // 1、引入组件
 import ChapterForm from '@/views/academy/course/components/Chapter/Form.vue'
-// import VideoForm from '@/views/academy/course/components/Video/Form.vue'
+import VideoForm from '@/views/academy/course/components/Video/Form.vue'
 
 export default {
-  components: { ChapterForm }, // 2、注册组件
+  components: { ChapterForm, VideoForm }, // 2、注册组件
   data() {
     return {
       chapterList: [] // 章节嵌套列表
@@ -65,7 +66,7 @@ export default {
 
   methods: {
 
-    // 获取后端章节列表数据
+    // 获取章节列表数据
     fetchNodeList() {
       chapter.getNestedList(this.$parent.courseId).then(response => {
         this.chapterList = response.data.items
@@ -78,6 +79,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
+        console.log('chapterId===>', chapterId)
         return chapter.removeById(chapterId)
       }).then(response => {
         this.fetchNodeList()
@@ -108,22 +110,23 @@ export default {
       this.$refs.videoForm.open(chapterId, videoId)
     },
 
-    // removeVideoById(videoId) {
-    //   this.$confirm('此操作将永久删除该课时, 是否继续?', '提示', {
-    //     confirmButtonText: '确定',
-    //     cancelButtonText: '取消',
-    //     type: 'warning'
-    //   }).then(() => {
-    //     return videoApi.removeById(videoId)
-    //   }).then(response => {
-    //     this.fetchNodeList()
-    //     this.$message.success(response.message)
-    //   }).catch((response) => {
-    //     if (response === 'cancel') {
-    //       this.$message.info('取消删除')
-    //     }
-    //   })
-    // },
+    removeVideoById(videoId) {
+      this.$confirm('此操作将永久删除该课时, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        console.log('删除课时')
+        return video.removeById(videoId)
+      }).then(response => {
+        this.fetchNodeList()
+        this.$message.success(response.message)
+      }).catch((response) => {
+        if (response === 'cancel') {
+          this.$message.info('取消删除')
+        }
+      })
+    },
 
     // 上一步
     prev() {

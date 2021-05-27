@@ -5,7 +5,7 @@ export default {
 
   save(video) {
     return request({
-      url: '${video_api}/save',
+      url: `${video_api}/save`,
       method: 'post',
       data: video
     })
@@ -20,7 +20,7 @@ export default {
 
   updateById(video) {
     return request({
-      url: '${video_api}/update',
+      url: `${video_api}/update`,
       method: 'put',
       data: video
     })
